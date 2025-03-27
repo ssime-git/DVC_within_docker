@@ -1,15 +1,31 @@
+# dvc.yaml (Working Hardcoded Version)
 stages:
   fetch_data:
     cmd: python src/fetch_data.py --output data/raw/iris.csv
     deps:
       - src/fetch_data.py
     outs:
-      - data/raw/iris.csv # DVC tracks this raw data file
+      - data/raw/iris.csv
 
   preprocess:
     cmd: python src/preprocess.py --input data/raw/iris.csv --output data/processed/iris_processed.csv
     deps:
-      - data/raw/iris.csv    # Depends on the fetched data
-      - src/preprocess.py    # Depends on the script
+      - data/raw/iris.csv
+      - src/preprocess.py
     outs:
-      - data/processed/iris_processed.csv # DVC tracks the processed output
+      - data/processed/iris_processed.csv
+
+  train:
+    # --- HARDCODE PARAMS ON ONE LINE ---
+    cmd: python src/train.py --input data/processed/iris_processed.csv --model-output model.joblib --C 1.0 --solver 'liblinear' --test-size 0.3 --random-state 42
+    deps:
+      - data/processed/iris_processed.csv
+      - src/train.py
+    # --- PARAMS SECTION COMMENTED OUT ---
+    # params:
+    #   - params.yaml:train.C
+    #   - params.yaml:train.solver
+    #   - params.yaml:train.test_size
+    #   - params.yaml:train.random_state
+    outs:
+      - model.joblib

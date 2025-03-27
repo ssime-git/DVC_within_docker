@@ -28,3 +28,20 @@ stages:
       hash: md5
       md5: d942e4811e5d11f5a3cdfdb1e5eb4c3c
       size: 13222
+  train:
+    cmd: python src/train.py --input data/processed/iris_processed.csv --model-output
+      model.joblib --C 1.0 --solver 'liblinear' --test-size 0.3 --random-state 42
+    deps:
+    - path: data/processed/iris_processed.csv
+      hash: md5
+      md5: d942e4811e5d11f5a3cdfdb1e5eb4c3c
+      size: 13222
+    - path: src/train.py
+      hash: md5
+      md5: 1b4632a1c962841c532125867f505d49
+      size: 8378
+    outs:
+    - path: model.joblib
+      hash: md5
+      md5: 9c9ae8768cdbb94c7642d59720fb309c
+      size: 1395

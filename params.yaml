@@ -1,0 +1,8 @@
+preprocess:
+  pass
+  
+train:
+  C: 1.0
+  solver: 'liblinear'
+  test_size: 0.3
+  random_state: 42
