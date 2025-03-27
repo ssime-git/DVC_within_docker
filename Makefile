@@ -6,6 +6,7 @@ set-dvc:
 	dvc remote modify origin endpointurl https://dagshub.com/ssime-git/DVC_within_docker.s3
 	dvc remote modify origin --local access_key_id XXX
 	dvc remote modify origin --local secret_access_key XXX
+	dvc remote default origin
 
 init-git:
 	git init
