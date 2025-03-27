@@ -1,0 +1,15 @@
+stages:
+  fetch_data:
+    cmd: python src/fetch_data.py --output data/raw/iris.csv
+    deps:
+      - src/fetch_data.py
+    outs:
+      - data/raw/iris.csv # DVC tracks this raw data file
+
+  preprocess:
+    cmd: python src/preprocess.py --input data/raw/iris.csv --output data/processed/iris_processed.csv
+    deps:
+      - data/raw/iris.csv    # Depends on the fetched data
+      - src/preprocess.py    # Depends on the script
+    outs:
+      - data/processed/iris_processed.csv # DVC tracks the processed output

@@ -1,0 +1,18 @@
+services:
+  dvc-runner:
+    build: .  # Build the image from the Dockerfile in the current directory
+    volumes:
+      # Mount the entire project directory into /workspace in the container
+      - .:/workspace
+      # Mount a named volume for the DVC cache
+      - dvc-cache:/workspace/.dvc/cache
+      # Optional: Mount credentials if needed for dvc push/pull later
+      # - ~/.aws:/root/.aws:ro
+      # - ~/.ssh:/root/.ssh:ro
+    working_dir: /workspace
+    # We will run commands explicitly using 'docker-compose run'
+    # No 'command' needed here for that pattern
+
+volumes:
+  # Define the named volume for the DVC cache
+  dvc-cache:
